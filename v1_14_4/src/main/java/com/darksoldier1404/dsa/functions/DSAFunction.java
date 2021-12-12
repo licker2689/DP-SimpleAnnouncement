@@ -115,8 +115,7 @@ public class DSAFunction {
                     plugin.getServer().broadcastMessage(prefix + announcements.get(index));
                 } else {
                     plugin.getServer().broadcastMessage(prefix + announcements.get(0));
-                    announcements.remove(0);
-                    announcements.add(announcements.size(), announcements.get(0));
+                    announcements.add(announcements.get(0));
                     announcements.remove(0);
                 }
             }
