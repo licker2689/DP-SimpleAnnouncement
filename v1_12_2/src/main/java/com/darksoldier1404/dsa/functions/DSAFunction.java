@@ -103,9 +103,9 @@ public class DSAFunction {
         } catch (Exception ignored) {
         }
         plugin.announcementTask = plugin.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
+            List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
             @Override
             public void run() {
-                List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
                 if (announcements.size() == 0) {
                     announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
                     return;
