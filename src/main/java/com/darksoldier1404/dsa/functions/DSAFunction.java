@@ -4,7 +4,6 @@ import com.darksoldier1404.dsa.SimpleAnnouncement;
 import com.darksoldier1404.duc.utils.ConfigUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +106,10 @@ public class DSAFunction {
             @Override
             public void run() {
                 List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
-                if (announcements.size() == 0) return;
+                if (announcements.size() == 0) {
+                    announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
+                    return;
+                }
                 if (config.getBoolean("Settings.random")) {
                     int index = (int) (Math.random() * announcements.size());
                     plugin.getServer().broadcastMessage(prefix + announcements.get(index));
@@ -116,11 +118,8 @@ public class DSAFunction {
                     announcements.remove(0);
                     announcements.add(announcements.size(), announcements.get(0));
                     announcements.remove(0);
-                    config.set("Settings.announcements", announcements);
-                    ConfigUtils.savePluginConfig(plugin, config);
                 }
             }
         }, 20L, config.getInt("Settings.interval") * 20);
     }
-
 }
