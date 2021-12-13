@@ -113,6 +113,7 @@ public class DSAFunction {
                 if (config.getBoolean("Settings.random")) {
                     int index = (int) (Math.random() * announcements.size());
                     plugin.getServer().broadcastMessage(prefix + announcements.get(index));
+                    announcements.remove(index);
                 } else {
                     plugin.getServer().broadcastMessage(prefix + announcements.get(0));
                     announcements.add(announcements.get(0));
