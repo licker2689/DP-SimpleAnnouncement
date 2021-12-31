@@ -15,7 +15,8 @@ public class DSAFunction {
     private static final String prefix = plugin.prefix;
 
     public static void addAnnouncement(CommandSender sender, String s) {
-        List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
+
+        List<String> announcements = config.getStringList("Settings.announcements");
         announcements.add(s);
         config.set("Settings.announcements", announcements);
         ConfigUtils.savePluginConfig(plugin, config);
@@ -26,7 +27,7 @@ public class DSAFunction {
     // remove announcement by index
 
     public static void removeAnnouncement(CommandSender sender, int index) {
-        List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
+        List<String> announcements = config.getStringList("Settings.announcements");
         if (announcements.size() <= index) {
             sender.sendMessage(prefix + "공지를 찾을 수 없습니다.");
             return;
@@ -38,10 +39,21 @@ public class DSAFunction {
         initAnnouncementsTask();
     }
 
+    // clear announcement
+
+    public static void clearAnnouncement(CommandSender sender){
+        List<String> announcements = config.getStringList("Settings.announcements");
+        announcements.clear();
+        config.set("Settings.announcements", announcements);
+        ConfigUtils.savePluginConfig(plugin, config);
+        sender.sendMessage(prefix + "공지가 초기화 되었습니다.");
+        initAnnouncementsTask();
+    }
+
     // edit announcement by index
 
     public static void editAnnouncement(CommandSender sender, int index, String s) {
-        List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
+        List<String> announcements = config.getStringList("Settings.announcements");
         if (announcements.size() <= index) {
             sender.sendMessage(prefix + "공지를 찾을 수 없습니다.");
             return;
@@ -56,7 +68,7 @@ public class DSAFunction {
     // show announcements list
 
     public static void showAnnouncements(CommandSender sender) {
-        List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
+        List<String> announcements = config.getStringList("Settings.announcements");
         if (announcements.size() == 0) {
             sender.sendMessage(prefix + "공지가 없습니다.");
             return;
@@ -90,10 +102,6 @@ public class DSAFunction {
         initAnnouncementsTask();
     }
 
-    public static List<String> getAnnouncements() {
-        return config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
-    }
-
     // init announcements task
 
     public static void initAnnouncementsTask() {
@@ -103,11 +111,11 @@ public class DSAFunction {
         } catch (Exception ignored) {
         }
         plugin.announcementTask = plugin.getServer().getScheduler().runTaskTimer(plugin, new Runnable() {
-            List<String> announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
+            List<String> announcements = config.getStringList("Settings.announcements");
             @Override
             public void run() {
                 if (announcements.size() == 0) {
-                    announcements = config.getStringList("Settings.announcements") == null ? new ArrayList<>() : config.getStringList("Settings.announcements");
+                    announcements = config.getStringList("Settings.announcements");
                     return;
                 }
                 if (config.getBoolean("Settings.random")) {
