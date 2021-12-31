@@ -27,6 +27,7 @@ public class DSACommand implements CommandExecutor, TabCompleter {
         if (args.length == 0) {
             sender.sendMessage(prefix + "/공지 추가 <내용> - 공지를 추가합니다.");
             sender.sendMessage(prefix + "/공지 삭제 <번호> - 공지를 삭제합니다.");
+            sender.sendMessage(prefix + "/공지 초기화 - 공지를 초기화합니다.");
             sender.sendMessage(prefix + "/공지 목록 - 공지목록을 보여줍니다.");
             sender.sendMessage(prefix + "/공지 수정 <번호> <내용> - 공지를 수정합니다.");
             sender.sendMessage(prefix + "/공지 간격 <초> - 공지 출력 간격을 설정합니다.");
@@ -58,6 +59,11 @@ public class DSACommand implements CommandExecutor, TabCompleter {
             } catch (NumberFormatException e) {
                 sender.sendMessage(prefix + "잘못된 번호입니다.");
             }
+            return false;
+        }
+        if (args[0].equals("초기화")) {
+            sender.sendMessage(prefix + "초기화가 완료되었습니다.");
+            DSAFunction.clearAnnouncement(sender);
             return false;
         }
         if (args[0].equals("목록")) {
