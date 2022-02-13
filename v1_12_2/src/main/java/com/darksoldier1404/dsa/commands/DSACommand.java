@@ -2,7 +2,7 @@ package com.darksoldier1404.dsa.commands;
 
 import com.darksoldier1404.dsa.SimpleAnnouncement;
 import com.darksoldier1404.dsa.functions.DSAFunction;
-import com.darksoldier1404.duc.utils.ConfigUtils;
+import com.darksoldier1404.dppc.utils.ConfigUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

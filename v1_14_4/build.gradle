@@ -9,7 +9,7 @@ tasks.withType(JavaCompile) {
 }
 
 group 'github.com/darksoldier1404'
-version = '1.0.0.6'
+version = '1.0.0.7'
 configurations {
     jar.archiveName = 'DP-SimpleAnnouncement-_' + name + '-' + version + '.jar'
 }
@@ -20,7 +20,7 @@ repositories {
         url 'https://repo.spring.io/plugins-release/'
     }
     maven {
-        url "http://dpnw.site:8081/repository/maven-releases/"
+        url "http://dpnw.site:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
 }
@@ -30,7 +30,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
     compileOnly 'org.spigotmc:spigot:1.14.4-R0.1-SNAPSHOT'
-    compileOnly 'com.darksoldier1404.duc:DP-UniversalCore:1.0.3.129:1.14.4'
+    compileOnly 'com.darksoldier1404.dppc:DPP-Core:1.14.4-SNAPSHOT'
 }
 
 test {
