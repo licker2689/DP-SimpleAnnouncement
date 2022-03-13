@@ -9,7 +9,7 @@ tasks.withType(JavaCompile) {
 }
 
 group 'github.com/darksoldier1404'
-version = '1.0.0.8'
+version = '1.0.0.10'
 configurations {
     jar.archiveName = 'DP-SimpleAnnouncement-_' + name + '-' + version + '.jar'
 }
@@ -24,7 +24,7 @@ repositories {
         url 'https://repo.spring.io/plugins-release/'
     }
     maven {
-        url "http://dpnw.site:8081/repository/maven-public/"
+        url "http://dpp.dpnw.site:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
 }

@@ -10,7 +10,7 @@ tasks.withType(JavaCompile) {
 }
 
 group 'github.com/darksoldier1404'
-version = '1.0.0.8'
+version = '1.0.0.10'
 
 task deleteMyFile(type: Delete) {
     delete "C:\\Minecraft Servers\\1.18 Play Ground\\plugins\\DP-SimpleAnnouncement-" + version + ".jar"
@@ -67,7 +67,7 @@ repositories {
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://oss.sonatype.org/content/repositories/central' }
     maven {
-        url "http://dpnw.site:8081/repository/maven-public/"
+        url "http://dpp.dpnw.site:8081/repository/maven-public/"
         allowInsecureProtocol = true
     }
 }

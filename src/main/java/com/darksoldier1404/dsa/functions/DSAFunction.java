@@ -2,6 +2,7 @@ package com.darksoldier1404.dsa.functions;
 
 import com.darksoldier1404.dsa.SimpleAnnouncement;
 import com.darksoldier1404.dppc.utils.ConfigUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -120,10 +121,10 @@ public class DSAFunction {
                 }
                 if (config.getBoolean("Settings.random")) {
                     int index = (int) (Math.random() * announcements.size());
-                    plugin.getServer().broadcastMessage(prefix + announcements.get(index));
+                    plugin.getServer().broadcastMessage(prefix + ChatColor.translateAlternateColorCodes('&', announcements.get(index)));
                     announcements.remove(index);
                 } else {
-                    plugin.getServer().broadcastMessage(prefix + announcements.get(0));
+                    plugin.getServer().broadcastMessage(prefix + ChatColor.translateAlternateColorCodes('&', announcements.get(0)));
                     announcements.add(announcements.get(0));
                     announcements.remove(0);
                 }
