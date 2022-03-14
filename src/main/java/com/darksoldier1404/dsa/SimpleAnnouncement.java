@@ -1,5 +1,6 @@
 package com.darksoldier1404.dsa;
 
+import com.darksoldier1404.dppc.utils.ColorUtils;
 import com.darksoldier1404.dsa.commands.DSACommand;
 import com.darksoldier1404.dsa.functions.DSAFunction;
 import com.darksoldier1404.dppc.DPPCore;
@@ -33,7 +34,7 @@ public class SimpleAnnouncement extends JavaPlugin {
         }
         core = (DPPCore) pl;
         config = ConfigUtils.loadDefaultPluginConfig(plugin);
-        prefix = ChatColor.translateAlternateColorCodes('&', config.getString("Settings.prefix"));
+        prefix = ColorUtils.applyColor(config.getString("Settings.prefix"));
         DSAFunction.initAnnouncementsTask();
         getCommand("공지").setExecutor(new DSACommand());
     }
