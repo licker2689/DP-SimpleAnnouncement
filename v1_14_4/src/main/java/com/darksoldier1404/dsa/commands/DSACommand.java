@@ -2,7 +2,6 @@ package com.darksoldier1404.dsa.commands;
 
 import com.darksoldier1404.dsa.SimpleAnnouncement;
 import com.darksoldier1404.dsa.functions.DSAFunction;
-import com.darksoldier1404.dppc.utils.ConfigUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,28 +15,28 @@ import java.util.List;
 
 @SuppressWarnings("all")
 public class DSACommand implements CommandExecutor, TabCompleter {
-    private final String prefix = SimpleAnnouncement.getInstance().prefix;
+    private static final SimpleAnnouncement plugin = SimpleAnnouncement.getInstance();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!sender.isOp()) {
-            sender.sendMessage(prefix + "관리자 전용 명령어입니다.");
+            sender.sendMessage(plugin.prefix + "관리자 전용 명령어입니다.");
             return false;
         }
         if (args.length == 0) {
-            sender.sendMessage(prefix + "/공지 추가 <내용> - 공지를 추가합니다.");
-            sender.sendMessage(prefix + "/공지 삭제 <번호> - 공지를 삭제합니다.");
-            sender.sendMessage(prefix + "/공지 초기화 - 공지를 초기화합니다.");
-            sender.sendMessage(prefix + "/공지 목록 - 공지목록을 보여줍니다.");
-            sender.sendMessage(prefix + "/공지 수정 <번호> <내용> - 공지를 수정합니다.");
-            sender.sendMessage(prefix + "/공지 간격 <초> - 공지 출력 간격을 설정합니다.");
-            sender.sendMessage(prefix + "/공지 랜덤 - 공지 출력을 랜덤하게 설정하거나 순서대로 출력되게 설정합니다.");
-            sender.sendMessage(prefix + "/공지 리로드 - 콘피그 설정을 리로드합니다.");
+            sender.sendMessage(plugin.prefix + "/공지 추가 <내용> - 공지를 추가합니다.");
+            sender.sendMessage(plugin.prefix + "/공지 삭제 <번호> - 공지를 삭제합니다.");
+            sender.sendMessage(plugin.prefix + "/공지 초기화 - 공지를 초기화합니다.");
+            sender.sendMessage(plugin.prefix + "/공지 목록 - 공지목록을 보여줍니다.");
+            sender.sendMessage(plugin.prefix + "/공지 수정 <번호> <내용> - 공지를 수정합니다.");
+            sender.sendMessage(plugin.prefix + "/공지 간격 <초> - 공지 출력 간격을 설정합니다.");
+            sender.sendMessage(plugin.prefix + "/공지 랜덤 - 공지 출력을 랜덤하게 설정하거나 순서대로 출력되게 설정합니다.");
+            sender.sendMessage(plugin.prefix + "/공지 리로드 - 콘피그 설정을 리로드합니다.");
             return false;
         }
         if (args[0].equals("추가")) {
             if (args.length == 1) {
-                sender.sendMessage(prefix + "추가할 공지 내용을 입력해주세요.");
+                sender.sendMessage(plugin.prefix + "추가할 공지 내용을 입력해주세요.");
                 return false;
             }
             StringBuilder sb = new StringBuilder();
@@ -50,19 +49,19 @@ public class DSACommand implements CommandExecutor, TabCompleter {
         }
         if (args[0].equals("삭제")) {
             if (args.length == 1) {
-                sender.sendMessage(prefix + "삭제할 공지 번호를 입력해주세요.");
+                sender.sendMessage(plugin.prefix + "삭제할 공지 번호를 입력해주세요.");
                 return false;
             }
             try {
                 int index = Integer.parseInt(args[1]);
                 DSAFunction.removeAnnouncement(sender, index);
             } catch (NumberFormatException e) {
-                sender.sendMessage(prefix + "잘못된 번호입니다.");
+                sender.sendMessage(plugin.prefix + "잘못된 번호입니다.");
             }
             return false;
         }
         if (args[0].equals("초기화")) {
-            sender.sendMessage(prefix + "초기화가 완료되었습니다.");
+            sender.sendMessage(plugin.prefix + "초기화가 완료되었습니다.");
             DSAFunction.clearAnnouncement(sender);
             return false;
         }
@@ -72,11 +71,11 @@ public class DSACommand implements CommandExecutor, TabCompleter {
         }
         if (args[0].equals("수정")) {
             if (args.length == 1) {
-                sender.sendMessage(prefix + "수정할 공지 번호를 입력해주세요.");
+                sender.sendMessage(plugin.prefix + "수정할 공지 번호를 입력해주세요.");
                 return false;
             }
             if (args.length == 2) {
-                sender.sendMessage(prefix + "수정할 공지 내용을 입력해주세요.");
+                sender.sendMessage(plugin.prefix + "수정할 공지 내용을 입력해주세요.");
                 return false;
             }
             try {
@@ -88,20 +87,20 @@ public class DSACommand implements CommandExecutor, TabCompleter {
                 String announcement = ChatColor.translateAlternateColorCodes('&', sb.toString());
                 DSAFunction.editAnnouncement(sender, index, announcement);
             } catch (NumberFormatException e) {
-                sender.sendMessage(prefix + "잘못된 번호입니다.");
+                sender.sendMessage(plugin.prefix + "잘못된 번호입니다.");
             }
             return false;
         }
         if (args[0].equals("간격")) {
             if (args.length == 1) {
-                sender.sendMessage(prefix + "공지 출력 간격을 입력해주세요.");
+                sender.sendMessage(plugin.prefix + "공지 출력 간격을 입력해주세요.");
                 return false;
             }
             try {
                 int interval = Integer.parseInt(args[1]);
                 DSAFunction.setAnnouncementInterval(sender, interval);
             } catch (NumberFormatException e) {
-                sender.sendMessage(prefix + "잘못된 간격입니다.");
+                sender.sendMessage(plugin.prefix + "잘못된 간격입니다.");
             }
             return false;
         }
@@ -109,10 +108,9 @@ public class DSACommand implements CommandExecutor, TabCompleter {
             DSAFunction.setAnnouncementRandom(sender);
             return false;
         }
-        if (args[0].equals("리로드")) {
-            SimpleAnnouncement.getInstance().config = ConfigUtils.reloadPluginConfig(SimpleAnnouncement.getInstance(), SimpleAnnouncement.getInstance().config);
-            DSAFunction.initAnnouncementsTask();
-            sender.sendMessage(prefix + "콘피그 설정이 리로드 되었습니다.");
+        if (args[0].equals("리로드") || args[0].equalsIgnoreCase("rl")) {
+            DSAFunction.reloadConfig();
+            sender.sendMessage(plugin.prefix + "콘피그 설정이 리로드 되었습니다.");
             return false;
         }
         return false;
