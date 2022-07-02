@@ -1,4 +1,4 @@
-name: DP-
+name: DP-SimpleAnnouncement
 on:
   push:
 jobs:
