@@ -1,4 +1,4 @@
-name: DP-RandomBox
+name: DP-
 on:
   push:
 jobs:
