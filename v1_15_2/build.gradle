@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.darksoldier1404'
-version = '1.0.0.14'
+version = '1.0.0.15'
 
 compileJava.options.encoding = 'UTF-8'
 tasks.withType(JavaCompile) {
@@ -22,12 +22,21 @@ build {
 }
 
 repositories {
-    mavenCentral()
+ mavenCentral()
+
+
+        maven {
+            url "http://feather-s.kr:8083/repository/maven-public/"
+            allowInsecureProtocol = true
+    }    
     maven {
-        url "http://dpp.dpnw.site:8081/repository/maven-public/"
-        allowInsecureProtocol = true
+            url "http://feather-s.kr:8083/repository/dpp-releases/"
+            allowInsecureProtocol = true
     }
 }
+
+
+
 
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
